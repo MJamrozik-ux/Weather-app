@@ -8,7 +8,7 @@ body {
   margin: 0;
 }
 
-form {
+#div0 {
   background-color: white;
   border-radius: 1rem;
   width: clamp(280px, 90%, 420px);
