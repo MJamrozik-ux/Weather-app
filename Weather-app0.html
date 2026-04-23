@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Starting page</title>
+    <style>
+        body{
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+            display: flex;
+            background-color: aqua;
+        }
+        div{
+            background-color: white;
+            border-radius: 1rem;
+            width: clamp(280px, 90%, 420px);
+
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            padding: 1.5rem;
+            overflow-y: auto;
+        }
+        button{
+            width: clamp(10px, 20%, 420px);
+            align-self: center;
+            margin-top: 10px;
+
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <label >Enter your city?</label>
+        <input type="text" id="city">
+        <button type="submit" id="sub">Submit</button>
+    </div>
+    
+    <script>
+        document.getElementById("sub").onclick = function () {
+            let city = document.getElementById("city").value;
+            localStorage.setItem("city", city);
+            window.location.href = "Weather-app.html";
+        };
+    </script>
+</body>
+</html>
