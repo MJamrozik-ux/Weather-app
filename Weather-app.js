@@ -1,4 +1,4 @@
-const API_KEY = "process.env.API_KEY;";
+
 let city = localStorage.getItem("city");
 
 function getDayName(dateString) {
@@ -40,8 +40,7 @@ function formatForecastData(data) {
 }
 
 async function getForecast() {
-    let url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}&units=metric&lang=en`;
-
+    let url = `http://localhost:3000/weather?city=${city}`;
     let response = await fetch(url);
 
     if (!response.ok) {
