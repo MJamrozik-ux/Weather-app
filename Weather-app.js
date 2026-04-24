@@ -1,4 +1,4 @@
-const API_KEY = "fb1eda3a318bd46aa9091ec92ba73e5c";
+const API_KEY = "process.env.API_KEY;";
 let city = localStorage.getItem("city");
 
 function getDayName(dateString) {
@@ -27,6 +27,7 @@ function formatForecastData(data) {
             };
         }
     }
+    
 
     let result = [];
     let keys = Object.keys(days);
@@ -38,56 +39,6 @@ function formatForecastData(data) {
     return result;
 }
 
-function getWeatherForDate(data, targetDate) {
-    let results = [];
-    let dates = [];
-
-    let baseDate = new Date(targetDate);
-
-    for (let i = 0; i < 3; i++) {
-        let d = new Date(baseDate);
-        d.setDate(baseDate.getDate() + i);
-
-        let year = d.getFullYear();
-        let month = String(d.getMonth() + 1).padStart(2, "0");
-        let day = String(d.getDate()).padStart(2, "0");
-
-        dates.push(`${year}-${month}-${day}`);
-    }
-
-    for (let i = 0; i < dates.length; i++) {
-        let target = dates[i];
-        let foundItem = null;
-
-        for (let j = 0; j < data.list.length; j++) {
-            let item = data.list[j];
-            let fullDate = item.dt_txt;
-
-            let isSameDate = fullDate.indexOf(target) === 0;
-            let isNoon = fullDate.indexOf("12:00:00") !== -1;
-
-            if (isSameDate && isNoon) {
-                foundItem = item;
-                break;
-            }
-        }
-
-        if (foundItem === null) {
-            results.push(null);
-        } else {
-            results.push({
-                date: target,
-                day: getDayName(foundItem.dt_txt),
-                temp: Math.round(foundItem.main.temp),
-                description: foundItem.weather[0].description,
-                icon: foundItem.weather[0].icon
-            });
-        }
-    }
-
-    return results;
-}
-
 async function getForecast() {
     let url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}&units=metric&lang=en`;
 
@@ -95,7 +46,7 @@ async function getForecast() {
 
     if (!response.ok) {
         console.log("API error: " + response.status);
-        window.location.href = "Weather-app0.html";
+        window.location.href = "Starting Page.html";
         window.alert("Invalid city")
         return;
     }
